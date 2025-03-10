@@ -1,4 +1,4 @@
-/* eslint-disable-next-line import/extensions */
+/* eslint-disable-next-line import/extensions, no-unused-vars */
 import Currency from './3-currency.js';
 
 export default class Pricing {
