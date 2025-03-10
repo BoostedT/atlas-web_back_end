@@ -20,7 +20,7 @@ export default class HolbertonCourse {
   get name() {
     return this._name;
   }
-  /* eslint-disable space-infix-ops */
+  /* eslint-disable space-infix-ops, lines-between-class-members */
   set name(value) {
     if (typeof value !== 'string') {
       throw new TypeError('Name must be a string');
