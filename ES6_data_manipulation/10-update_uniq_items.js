@@ -4,7 +4,7 @@ export default function updateUniqItems(groceriesMap) {
 }
 
 for (const [key, value] of groceriesMap) {
-  if (value === 0) {
+  if (value === 1) {
     groceriesMap.set(key, 100);
   }
 }
