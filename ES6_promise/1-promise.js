@@ -1,4 +1,4 @@
-  /* eslint-disable object-curly-newline,brace-style */
+/* eslint-disable object-curly-newline,brace-style */
 export default function getFullResponseAPI(success) {
   return new Promise((resolve, reject) => {
     if (success) {
