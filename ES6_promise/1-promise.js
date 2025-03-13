@@ -1,4 +1,4 @@
-export default function getFullResponse(success) {
+export default function getFullResponseAPI(success) {
   return new Promise((resolve, reject) => {
     if (success) {
       resolve({
