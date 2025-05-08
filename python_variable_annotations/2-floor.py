@@ -2,8 +2,8 @@
 """task 2 2-floor.py"""
 
 
-def floor(n: str) -> float:
+def floor(n: float) -> int:
     """
     Returns the floor as a float.
     """
-    return float(n) // 1
+    return int(n)
