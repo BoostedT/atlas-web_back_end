@@ -9,7 +9,9 @@ from typing import List, Dict, Any
 class Server:
     """Server class to paginate a database of popular baby names."""
 
-    DATA_FILE = os.path.join(os.path.dirname(__file__), "Popular_Baby_Names.csv")
+    DATA_FILE = os.path.join(
+      os.path.dirname(__file__),
+      "Popular_Baby_Names.csv")
 
     def __init__(self):
         self.__dataset = None
