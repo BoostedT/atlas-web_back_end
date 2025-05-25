@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
-"""
-Deletion-resilient hypermedia pagination
-"""
-
+"""task 3 3-hypermedia_del_pagination.py"""
 import csv
 import math
 import os
-from typing import List
-from typing import Dict, Any
+from typing import List, Dict, Any
 
 
 class Server:
