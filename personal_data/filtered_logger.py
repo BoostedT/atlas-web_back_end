@@ -77,29 +77,3 @@ def close_db_connection(conn: MySQLConnection) -> None:
         conn (MySQLConnection): The database connection to close.
     """
     conn.close()
-
-
-def main():
-    """
-    Retrieves user records from the
-    database and logs them with
-    redacted fields.
-    """
-    db = get_db()
-    cursor = db.cursor()
-
-    logger = get_logger()
-    cursor.execute("SELECT * FROM users;")
-
-    for row in cursor:
-        msg = ";".join([f"{desc[0]}={value}"
-                        for desc, value in zip(cursor.description, row)])
-        logger.info(msg)
-
-    cursor.close()
-    """Close the database connection."""
-    close_db_connection(db)
-
-
-if __name__ == "__main__":
-    main()
