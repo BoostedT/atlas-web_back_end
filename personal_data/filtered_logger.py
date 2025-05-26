@@ -67,13 +67,3 @@ def get_db() -> MySQLConnection:
         host=os.environ.get("PERSONAL_DATA_DB_HOST", "localhost"),
         database=os.environ["PERSONAL_DATA_DB_NAME"]
     )
-
-
-def close_db_connection(conn: MySQLConnection) -> None:
-    """
-    Closes the MySQL database connection.
-
-    Args:
-        conn (MySQLConnection): The database connection to close.
-    """
-    conn.close()
