@@ -14,7 +14,7 @@ def filter_datum(
         lambda m: f"{m.group(1)}={redaction}{separator}",
         message + separator,
     )[: -len(separator)]
-    
+
 
 class RedactingFormatter(logging.Formatter):
     """Redacting Formatter class"""
