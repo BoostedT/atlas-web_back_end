@@ -92,8 +92,8 @@ def main():
     cursor.execute("SELECT * FROM users;")
 
     for row in cursor:
-        msg = ";".join([f"{desc[0]}={value}" 
-            for desc, value in zip(cursor.description, row)])
+        msg = ";".join([f"{desc[0]}={value}"
+                        for desc, value in zip(cursor.description, row)])
         logger.info(msg)
 
     cursor.close()
