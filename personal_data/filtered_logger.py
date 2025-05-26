@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Filtered logger module """
+"""Filtered logger module"""
 import re
 from typing import List
 import logging
@@ -28,6 +28,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """Formats a log record, redacting specified fields."""
         original = super().format(record)
         return filter_datum(
           self.fields, self.REDACTION, original, self.SEPARATOR)
