@@ -97,6 +97,7 @@ def main():
         logger.info(msg)
 
     cursor.close()
+    """Close the database connection."""
     close_db_connection(db)
 
 
