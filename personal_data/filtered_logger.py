@@ -67,3 +67,33 @@ def get_db() -> MySQLConnection:
         host=os.environ.get("PERSONAL_DATA_DB_HOST", "localhost"),
         database=os.environ["PERSONAL_DATA_DB_NAME"]
     )
+def close_db_connection(conn: MySQLConnection) -> None:
+    """
+    Closes the MySQL database connection.
+
+    Args:
+        conn (MySQLConnection): The database connection to close.
+    """
+    conn.close()
+
+
+def main():
+    """
+    Retrieves user records from the database and logs them with redacted fields.
+    """
+    db = get_db()
+    cursor = db.cursor()
+
+    logger = get_logger()
+    cursor.execute("SELECT * FROM users;")
+
+    for row in cursor:
+        msg = ";".join([f"{desc[0]}={value}" for desc, value in zip(cursor.description, row)])
+        logger.info(msg)
+
+    cursor.close()
+    close_db_connection(db)
+
+
+if __name__ == "__main__":
+    main()
