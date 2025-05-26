@@ -16,7 +16,9 @@ from mysql.connector.connection import MySQLConnection
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+def filter_datum(
+  fields: List[str], redaction: str,
+  message: str, separator: str) -> str:
     """
     Obfuscates specified fields in a log message.
 
@@ -63,7 +65,8 @@ class RedactingFormatter(logging.Formatter):
             The formatted string with redacted fields.
         """
         original = super().format(record)
-        return filter_datum(self.fields, self.REDACTION, original, self.SEPARATOR)
+        return filter_datum(
+          self.fields, self.REDACTION, original, self.SEPARATOR)
 
 
 def get_logger() -> logging.Logger:
@@ -110,7 +113,8 @@ def main() -> None:
     headers = [column[0] for column in cursor.description]
 
     for row in cursor:
-        message = "; ".join(f"{key}={value}" for key, value in zip(headers, row)) + ";"
+        message = "; ".join(f"{key}={value}"
+                            for key, value in zip(headers, row)) + ";"
         logger.info(message)
 
     cursor.close()
