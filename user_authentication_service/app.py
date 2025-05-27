@@ -53,7 +53,7 @@ def logout():
         abort(403)
 
     AUTH.destroy_session(user.id)
-    return jsonify({"message": "logout successful"}), 200
+    return jsonify({"message": "logout successful"})
 
 
 if __name__ == "__main__":
