@@ -16,8 +16,8 @@ def index():
 @app.route('/users', methods=['POST'])
 def users():
     """Users route"""
-    email = request.forms.get('email')
-    password = request.forms.get('password')
+    email = request.form.get('email')
+    password = request.form.get('password')
     
     try:
       Auth.register_user(email, password)
