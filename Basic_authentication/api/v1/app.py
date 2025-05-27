@@ -35,7 +35,7 @@ def forbidden(error) -> str:
     """Custom Forbidden handler"""
     return jsonify({"error": "Forbidden"}), 403
 
-
+@app.before_request
 def before_request() -> None:
     """Before request handler"""
     if auth is None:
