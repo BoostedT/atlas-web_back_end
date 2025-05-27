@@ -48,7 +48,7 @@ class DB:
             raise
         except InvalidRequestError:
             raise
-          
+
     def update_user(self, user_id: int, **kwargs) -> None:
         """
         Update a user’s attributes and commit changes.
