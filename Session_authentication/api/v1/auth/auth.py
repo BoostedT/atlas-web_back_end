@@ -3,7 +3,7 @@
 
 from flask import request
 from typing import List, TypeVar
-
+from os import getenv
 
 class Auth:
     """Template for all authentication systems"""
@@ -22,8 +22,8 @@ class Auth:
         if path is None or not excluded_paths:
             return True
 
-        if not path.endswith('/'):
-            path += '/'
+        if not path.endswith("/"):
+            path += "/"
 
         for excluded in excluded_paths:
             if excluded == path:
@@ -44,13 +44,25 @@ class Auth:
         if request is None:
             return None
 
-        auth_header = request.headers.get('Authorization')
+        auth_header = request.headers.get("Authorization")
         if auth_header is None:
             return None
         return auth_header
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> TypeVar("User"):
         """
         Returns the current user.
         """
         return None
+
+    def session_cookie(self, request=None):
+        """
+        Returns the session cookie from the request."""
+        if request is None:
+            return None
+
+        session_name = getenv("SESSION_NAME")
+        if not session_name:
+            return None
+
+        return request.cookies.get("session_id")
