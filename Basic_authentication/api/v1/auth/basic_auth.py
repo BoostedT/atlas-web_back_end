@@ -4,6 +4,7 @@ Basic authentication module for API v1
 """
 
 from api.v1.auth.auth import Auth
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
@@ -84,3 +85,32 @@ class BasicAuth(Auth):
             return None, None
 
         return user_pass[0], user_pass[1]
+      
+    def user_object_from_credentials(
+      self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """
+        Retrieves a user object based on email and password.
+
+        Args:
+            user_email (str): The user's email.
+            user_pwd (str): The user's password.
+
+        Returns:
+            User or None: The user object if found,
+            or None if not found.
+        """
+        if user_email is None or user_pwd is None:
+            return None
+
+        from models.user import User
+        try:
+            user = User.search({'email': user_email})
+            if not user:
+                return None
+            for u in user:
+                if u.is_valid_password(user_pwd):
+                    return u
+        except Exception:
+            return None
+
+        return None
