@@ -85,7 +85,7 @@ class BasicAuth(Auth):
             return None, None
 
         return user_pass[0], user_pass[1]
-      
+
     def user_object_from_credentials(
       self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """
