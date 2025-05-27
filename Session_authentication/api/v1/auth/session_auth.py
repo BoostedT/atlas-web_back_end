@@ -52,4 +52,4 @@ class SessionAuth(Auth):
         if user_id is None:
             return None
 
-        return User.get(session_id)
+        return User.get(user_id)
