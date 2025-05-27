@@ -10,8 +10,7 @@ from typing import TypeVar
 class BasicAuth(Auth):
     """BasicAuth class that handles Basic Authentication"""
 
-    def extract_base64_authorization_header(
-      self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self, authorization_header: str) -> str:
         """
         Extracts the Base64 part of the Authorization header for Basic Auth.
 
@@ -30,7 +29,7 @@ class BasicAuth(Auth):
         if not authorization_header.startswith("Basic "):
             return None
 
-        return authorization_header[len("Basic "):]
+        return authorization_header[len("Basic ") :]
 
     def decode_base64_authorization_header(
         self, base64_authorization_header: str
@@ -77,17 +76,18 @@ class BasicAuth(Auth):
         if not isinstance(decoded_base64_authorization_header, str):
             return None, None
 
-        if ':' not in decoded_base64_authorization_header:
+        if ":" not in decoded_base64_authorization_header:
             return None, None
 
-        user_pass = decoded_base64_authorization_header.split(':', 1)
+        user_pass = decoded_base64_authorization_header.split(":", 1)
         if len(user_pass) != 2:
             return None, None
 
         return user_pass[0], user_pass[1]
 
     def user_object_from_credentials(
-      self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        self, user_email: str, user_pwd: str
+    ) -> TypeVar("User"):
         """
         Retrieves a user object based on email and password.
 
@@ -103,8 +103,9 @@ class BasicAuth(Auth):
             return None
 
         from models.user import User
+
         try:
-            user = User.search({'email': user_email})
+            user = User.search({"email": user_email})
             if not user:
                 return None
             for u in user:
@@ -114,8 +115,8 @@ class BasicAuth(Auth):
             return None
 
         return None
-      
-    def current_user(self, request=None) -> TypeVar('User'):
+
+    def current_user(self, request=None) -> TypeVar("User"):
         """
         Retrieves the current user from the request.
 
