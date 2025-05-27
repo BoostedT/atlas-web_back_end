@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request
 from auth import Auth
 
 app = Flask(__name__)
-AUTH = Auth()
+auth = Auth()
 
 
 @app.route('/', methods=['GET'])
@@ -20,7 +20,7 @@ def users():
     password = request.form.get('password')
     
     try:
-      Auth.register_user(email, password)
+      auth.register_user(email, password)
       return jsonify({"email": email, "message": "user created"}), 200
     except Exception:
       return jsonify({"message": "email already exists"}), 400
