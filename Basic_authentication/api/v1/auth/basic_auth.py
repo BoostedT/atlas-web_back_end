@@ -67,7 +67,8 @@ class BasicAuth(Auth):
             decoded_base64_authorization_header (str): The decoded string.
 
         Returns:
-            tuple: A tuple containing the username and password, or (None, None) if invalid.
+            tuple: A tuple containing the username and password,
+            or (None, None) if invalid.
         """
         if decoded_base64_authorization_header is None:
             return None, None
