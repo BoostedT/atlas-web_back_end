@@ -3,6 +3,7 @@
 
 from flask import Flask, jsonify, request, abort
 from auth import Auth
+from flask import redirect
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -53,7 +54,7 @@ def logout():
         abort(403)
 
     AUTH.destroy_session(user.id)
-    return jsonify({"message": "logout successful"})
+    return redirect("/")
 
 
 if __name__ == "__main__":
