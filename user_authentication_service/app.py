@@ -4,6 +4,7 @@
 from flask import Flask, jsonify, request, abort
 from auth import Auth
 from flask import redirect
+from auth import _hash_password
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -88,15 +89,20 @@ def reset_password():
 @app.route("/reset_password", methods=["PUT"])
 def update_password():
     """Update password"""
+    email = request.form.get("email")
     reset_token = request.form.get("reset_token")
-    password = request.form.get("password")
-    if not reset_token or not password:
+    new_password = request.form.get("new_password")
+    
+    if not email or not reset_token or not new_password:
         abort(403)
+        
     try:
-        AUTH.update_password(reset_token, password)
+      user = AUTH._db.find_user_by(email=email, reset_token=reset_token)
+      hashed_pwd = _hash_password(new_password)
+      AUTH._db.update_user(user.id, hashed_password=hashed_pwd.decode(), reset_token=None)
     except Exception:
         abort(403)
-    return jsonify({"message": "Password updated"}), 200
+    return jsonify({"email": email, "message": "Password updated"}), 200
 
 
 if __name__ == "__main__":
