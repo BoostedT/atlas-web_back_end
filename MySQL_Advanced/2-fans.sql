@@ -1,13 +1,11 @@
 -- Query to to rank country origins by total number of (non-unique) fans
 
 SELECT
-  bands.origin AS origin,
-  COUNT(fans.id) AS nb_fans
+  origin,
+  SUM(fans) AS nb_fans
 FROM
-  bands
-LEFT JOIN
-  fans ON fans.band_id = bands.id
+  metal_bands
 GROUP BY
-  bands.origin
+  origin
 ORDER BY
   nb_fans DESC;
