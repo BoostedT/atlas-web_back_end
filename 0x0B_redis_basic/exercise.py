@@ -47,8 +47,8 @@ def replay(method: Callable) -> None:
         
 
 class Cache:
+    """Initialize the Cache with a Redis connection and flush the database."""
     def __init__(self):
-        """Initialize the Cache with a Redis connection and flush the database."""
         self._redis = redis.Redis()
         self._redis.flushdb()
 
