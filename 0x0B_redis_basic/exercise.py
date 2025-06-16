@@ -8,11 +8,28 @@ from typing import Optional, Callable, Union
 
 def count_calls(method: Callable) -> Callable:
     """Decorator to count the number of calls to a method."""
+
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         key = method.__qualname__
         self._redis.incr(key)
         return method(self, *args, **kwargs)
+
+    return wrapper
+
+
+def call_history(method: Callable) -> Callable:
+    """Decorator to store the history of inputs and outputs for a method."""
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        input_key = method.__qualname__ + ":inputs"
+        output_key = method.__qualname__ + ":outputs"
+        self._redis.rpush(input_key, str(args))
+        results = method(self, *args, **kwargs)
+        self._redis.rpush(output_key, str(results))
+        return results
+
     return wrapper
 
 
@@ -22,6 +39,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Generate a UUID key, store the data in Redis, and return the key."""
