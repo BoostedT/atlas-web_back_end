@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Module for Redis cache with decorators to count calls and store history."""
 from typing import Union
 from functools import wraps
 import redis
