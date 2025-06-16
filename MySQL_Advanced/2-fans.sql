@@ -5,7 +5,7 @@ SELECT
   COUNT(fans.id) AS nb_fans
 FROM
   bands
-JOIN
+LEFT JOIN
   fans ON fans.band_id = bands.id
 GROUP BY
   bands.origin
