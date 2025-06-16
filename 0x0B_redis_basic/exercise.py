@@ -33,6 +33,7 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 def replay(method: Callable) -> None:
+  """Display the history of calls to a method."""
   r = method.__self__._redis
   name = method.__qualname__
   
