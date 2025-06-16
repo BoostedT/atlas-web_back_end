@@ -33,21 +33,23 @@ def call_history(method: Callable) -> Callable:
 
     return wrapper
 
+
 def replay(method: Callable) -> None:
-  """Display the history of calls to a method."""
-  r = method.__self__._redis
-  name = method.__qualname__
-  
-  inputs = r.lrange(f"{name}:inputs", 0, -1)
-  outputs = r.lrange(f"{name}:outputs", 0, -1)
-  
-  print(f"{name} was called {len(inputs)} times:")
-  for inp, out in zip(inputs, outputs):
-    print(f"{name}(*{inp.decode()}) -> {out.decode()}")
-        
+    """Display the history of calls to a method."""
+    r = method.__self__._redis
+    name = method.__qualname__
+
+    inputs = r.lrange(f"{name}:inputs", 0, -1)
+    outputs = r.lrange(f"{name}:outputs", 0, -1)
+
+    print(f"{name} was called {len(inputs)} times:")
+    for inp, out in zip(inputs, outputs):
+        print(f"{name}(*{inp.decode()}) -> {out.decode()}")
+
 
 class Cache:
     """Initialize the Cache with a Redis connection and flush the database."""
+
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
