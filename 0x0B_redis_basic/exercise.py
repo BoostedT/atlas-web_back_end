@@ -70,7 +70,9 @@ class Cache:
         return fn(data) if fn else data
 
     def get_str(self, key: str) -> Optional[str]:
+        """Retrieve a string from Redis by key."""
         return self.get(key, fn=lambda d: d.decode("utf-8"))
 
     def get_int(self, key: str) -> Optional[int]:
+        """Retrieve an integer from Redis by key."""
         return self.get(key, fn=int)
