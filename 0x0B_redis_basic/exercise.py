@@ -63,6 +63,7 @@ class Cache:
     def get(
         self, key: str, fn: Optional[Callable] = None
     ) -> Union[str, bytes, int, None]:
+        """Retrieve data from Redis by key and apply a function if provided."""
         data = self._redis.get(key)
         if data is None:
             return None
