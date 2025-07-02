@@ -1,6 +1,6 @@
 // 0-console.js
-function displaymessage() {
-    console.log("Hello, World!");
+function displaymessage(message) {
+    console.log(message);
 }
 
 module.exports = displaymessage;
